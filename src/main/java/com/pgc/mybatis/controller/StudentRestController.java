@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/students") // URL 경로 공통 부분 지정
 @RequiredArgsConstructor // final 필드에 대한 생성자 자동 주입
-public class StudentController {
+public class StudentRestController {
 
     private final StudentService studentService;
 
