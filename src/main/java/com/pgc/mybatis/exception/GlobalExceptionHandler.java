@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
 
         // 발생한 모든 유효성 검증 오류를 순회
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
+        ex.getBindingResult().getAllErrors().forEach(error -> {
             // (FieldError) 형변환을 통해 오류가 발생한 필드 이름을 가져옴
             String fieldName = ((FieldError) error).getField();
             // Student.java에 설정한 defaultMessage를 가져옴
