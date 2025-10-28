@@ -1,10 +1,10 @@
 package com.pgc.mybatis.service;
 
 import com.pgc.mybatis.domain.Student;
-import com.pgc.mybatis.mapper.StudentMapper; // 가정된 Mapper 경로
+import com.pgc.mybatis.mapper.StudentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // 트랜잭션 관리
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
