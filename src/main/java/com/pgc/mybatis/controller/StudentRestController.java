@@ -2,6 +2,7 @@ package com.pgc.mybatis.controller;
 
 import com.pgc.mybatis.domain.Student;
 import com.pgc.mybatis.service.StudentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class StudentRestController {
 
     // CREATE: 학생 생성
     @PostMapping
-    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> createStudent(@Valid @RequestBody Student student) { // <-- @Valid 추가
         Student createdStudent = studentService.createStudent(student);
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
@@ -43,7 +44,8 @@ public class StudentRestController {
 
     // UPDATE: 학생 정보 수정
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable("id") Long id, @RequestBody Student studentDetails) {
+    public ResponseEntity<Student> updateStudent(@PathVariable("id") Long id,
+                                                 @Valid @RequestBody Student studentDetails) { // <-- @Valid 추가
         Student updatedStudent = studentService.updateStudent(id, studentDetails);
         if (updatedStudent != null) {
             return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
