@@ -28,6 +28,11 @@ public class StudentService {
     // READ by ID
     @Transactional(readOnly = true) // 읽기 전용 트랜잭션
     public Student getStudentById(Long id) {
+
+        if (id == 999L) {
+            throw new RuntimeException("AOP 예외 테스트용 강제 에러!");
+        }
+
         return studentMapper.findById(id);
     }
 
