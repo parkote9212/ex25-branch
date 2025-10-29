@@ -20,10 +20,10 @@ public class DBConnTest {
     public String dbconn() {
         try (Connection conn = dataSource.getConnection()) {
             String result = conn.getMetaData().getURL();
-            log.info("DB 연결 성공: {}" + result); // 로그 출력
+            log.info("DB 연결 성공: {}" , result); // 로그 출력
             return "DB연결 성공: " + result;
         } catch (Exception e) {
-            log.error("DB 연결 실패" + e); // 에러 로그 출력
+            log.error("DB 연결 실패" , e); // 에러 로그 출력
             return "DB연결실패";
         }
     }

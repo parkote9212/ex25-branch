@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +46,11 @@ public class StudentViewController {
      * [CREATE] 학생 생성 처리
      */
     @PostMapping("/students")
-    public String createStudent(@Valid @ModelAttribute Student student) {
+    public String createStudent(@Valid @ModelAttribute Student student,
+                                BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new";
+        }
         studentService.createStudent(student);
         return "redirect:/students"; // 목록 페이지로 리다이렉트
     }
@@ -68,7 +73,11 @@ public class StudentViewController {
      * [UPDATE] 학생 수정 처리
      */
     @PostMapping("/students/{id}")
-    public String updateStudent(@PathVariable("id") Long id, @Valid @ModelAttribute Student studentDetails) {
+    public String updateStudent(@PathVariable("id") Long id, @Valid @ModelAttribute Student studentDetails,
+                                BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "edit";
+        }
         studentService.updateStudent(id, studentDetails);
         return "redirect:/students"; // 목록 페이지로 리다이렉트
     }
