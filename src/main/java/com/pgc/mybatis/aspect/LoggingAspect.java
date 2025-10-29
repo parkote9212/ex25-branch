@@ -1,3 +1,4 @@
+/*
 package com.pgc.mybatis.aspect;
 
 import lombok.extern.java.Log;
@@ -23,3 +24,4 @@ public class LoggingAspect {
         log.info("##### 메서드 실행성공: {}, \n결과: {} #####AfterReturning#####", jp.getSignature(),result);
     }
 }
+*/
