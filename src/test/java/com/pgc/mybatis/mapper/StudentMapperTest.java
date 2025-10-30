@@ -46,14 +46,15 @@ class StudentMapperTest {
         assertThat(generatedId).isNotNull();
 
         Student foundStudent = studentMapper.findById(generatedId);
-        assertThat(foundStudent).isNotNull();
-        assertThat(foundStudent.getName()).isEqualTo("테스트학생");
-        assertThat(foundStudent.getEmail()).isEqualTo("test@example.com");
+        assertThat(foundStudent)
+                .isNotNull() // 1. null이 아님
+                .extracting(Student::getName, Student::getEmail) // 2. 이름과 이메일을 추출
+                .containsExactly("테스트학생", "test@example.com"); // 3. 순서대로 검증
     }
 
     @Test
     @DisplayName("모든 학생 조회(findAll)")
-    void findAll(){
+    void findAll() {
         //given
         studentMapper.insert(student);
 
@@ -69,11 +70,13 @@ class StudentMapperTest {
         List<Student> students = studentMapper.findAll();
 
         // then
-        assertThat(students).isNotNull();
-        assertThat(students.size()).isEqualTo(2);
+        assertThat(students)
+                .isNotNull()
+                .hasSize(2);
         assertThat(students.get(0).getName()).isEqualTo("학생2");
         assertThat(students.get(1).getName()).isEqualTo("테스트학생");
     }
+
     @Test
     @DisplayName("학생 정보 수정(update)")
     void update() {
@@ -90,8 +93,10 @@ class StudentMapperTest {
 
         // then
         Student updatedStudent = studentMapper.findById(id);
-        assertThat(updatedStudent.getName()).isEqualTo("수정된이름");
-        assertThat(updatedStudent.getAge()).isEqualTo(25);
+        assertThat(updatedStudent)
+                .isNotNull() // (null 체크는 항상 좋은 습관입니다)
+                .extracting(Student::getName, Student::getAge)
+                .containsExactly("수정된이름", 25);
     }
 
     @Test
